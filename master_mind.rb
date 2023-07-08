@@ -38,7 +38,7 @@ class Master_mind
 
     @max_rodadas.times do |i|
       puts "Rodada #{i + 1} de #{@max_rodadas}"
-      puts "Digite os números correspondentes às cores separados por vírgula! [1-9]"
+      puts "Digite #{cor.length} números correspondentes às cores separados por vírgula! [1-9]"
       cor_atual = gets.chomp.split(",").map(&:to_i)
 
       verifica_cor_posicao(cor_atual,cor)
