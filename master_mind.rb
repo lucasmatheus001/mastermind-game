@@ -1,18 +1,21 @@
-@cor =  [1,2,3,4,5,6]
-@cor.shuffle!
+@cor = [1, 2, 3, 4, 5, 6].shuffle!
+puts @cor
 
 class Master_mind
-  
+  def initialize
+    @max_rodadas = 0
+    @tentativas = 0
+  end
+
   def verifica_cor_posicao(cor,cor2)
     cont =0
     cont2 =0
     cor.each_with_index do |valor, index|
-      cor2.each_with_index do |cor, i| 
+      cor2.each_with_index do |cor, i|
         if(valor == cor && index != i)
           cont += 1
         end
         if(valor == cor && index == i)
-          puts cor
           cont2 += 1
         end
       end
@@ -20,18 +23,35 @@ class Master_mind
     puts " cor correta e posição errada ---> #{cont}"
     puts "cor e posição correta -----> #{cont2}"
 
+    if cont2 == cor.length
+      puts "Parabéns! Você venceu!"
+      return true
+    end
+
+    return false
   end
+
+  def iniciar_jogo(cor)
+    puts "-------------------------------- Iniciando jogo --------------------------------"
+    puts "Digite o número de rodadas que deseja jogar: [1-10]"
+    @max_rodadas = gets.chomp.to_i
+
+    @max_rodadas.times do |i|
+      puts "Rodada #{i + 1} de #{@max_rodadas}"
+      puts "Digite os números correspondentes às cores separados por vírgula! [1-9]"
+      cor_atual = gets.chomp.split(",").map(&:to_i)
+
+      verifica_cor_posicao(cor_atual,cor)
+
+      @tentativas += 1
+      if @tentativas == @max_rodadas
+        puts "Fim de jogo! Suas tentativas acabaram."
+      end
+    end
+  end
+
 end
 
 # start interaction
 master = Master_mind.new
-rodadas =0
-puts "-------------------------------- Inciando jogo --------------------------------"
-puts " Digite o numero de rodadas que deseja jogar: [1-10]"
-rodadas = gets.chomp.to_i
-rodadas.times do |i|
-  puts "Digite os numeros correspondente as cores separados por virgula! [1-9]"
-  cor =  gets.chomp.split(",").map(&:to_i)
-  puts cor
-  master.verifica_cor_posicao(cor,@cor)
-end
+master.iniciar_jogo(@cor)
