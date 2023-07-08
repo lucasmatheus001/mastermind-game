@@ -20,11 +20,11 @@ class Master_mind
         end
       end
     end
-    puts " cor correta e posição errada ---> #{cont}"
-    puts "cor e posição correta -----> #{cont2}"
+    puts " ⚪️ cor correta e posição errada ---> #{cont}"
+    puts " 🔴 cor e posição correta -----> #{cont2}"
 
     if cont2 == cor.length
-      puts "Parabéns! Você venceu!"
+      puts "🎉Parabéns! Você venceu!"
       return true
     end
 
